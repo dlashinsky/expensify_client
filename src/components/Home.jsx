@@ -1,8 +1,7 @@
-export default function Home(){
+export default function Home(props){
+    
+    
     return (
-        <div>
-            Hello from Home!
-            
-        </div>
+        <h1>Welcome to Expensify!</h1>
     )
 }

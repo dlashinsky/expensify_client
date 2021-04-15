@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Register from './components/Register'
 import Home from './components/Home'
 import Login from './components/Login'
+import Dashboard from './components/Dashboard'
 import './App.css';
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
 
       <div className="App">
         <Switch>
-          <Route exact path="/" component={ Home }/>
-
+          <Route exact path="/" component={ Home } currentUser = { currentUser }/>
+        
           <Route 
             path="/register"
             render={ (props) => <Register {...props} currentUser={ currentUser } setCurrentUser={ setCurrentUser} /> }
@@ -35,6 +36,11 @@ function App() {
           <Route 
             path="/login"
             render={ (props) => <Login {...props} currentUser={ currentUser } setCurrentUser={ setCurrentUser} /> }
+          />
+          
+          <Route 
+            path="/dashboard"
+            render={ (props) => <Dashboard {...props} currentUser={ currentUser } setCurrentUser={ setCurrentUser} /> }
           />
         
 
