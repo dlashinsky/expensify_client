@@ -11,9 +11,7 @@ export default function SideNav(props){
 
 
             <Link to='/credit-cards'>
-                <button
-                   
-                >Credit Cards</button>
+                <button>Credit Cards</button>
             </Link>
             <Link to='/fixed-expenses'>
                 <button>Fixed Expenses</button>
@@ -27,6 +25,7 @@ export default function SideNav(props){
             <Link to='/savings'>
                 <button>Savings</button>
             </Link>
+            
            
         </div>
        
