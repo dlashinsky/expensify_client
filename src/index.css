@@ -9,5 +9,95 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
 }
+
+.app-container{
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+}
+
+.main-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.home-div-route{
+  display: flex;
+  justify-content: center;
+}
+
+.SideNav-div {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  margin-top: 30%;
+}
+
+.SideNav-div button{
+    background-color: rgb(13, 146, 223);
+    margin-top: 20px;
+    width: 70%;
+    height: 50px;
+    border-radius: 6px;
+    padding: 5px;
+    margin-left: -8%;
+}
+
+.SideNav-div button:focus{
+  background-color: rgba(35, 135, 197, 0.644);
+}
+
+.credit-card-container{
+  display: flex;
+  flex-direction: column;
+  border: 1px solid green;
+  
+}
+
+.cc-basic-data-div{
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  border-radius: 10px;
+  width: 800px;
+  height: auto;
+  margin-top: 4px;
+  text-align: left;
+  padding: 20%;
+}
+
+.cc-number-data{
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+}
+.card-nick-name{
+  text-decoration-thickness: 4px;
+}
+
+.cc-number-data h5{
+  margin-left: 0px;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.mb-2{
+  margin: 2%;
+  display: flex;
+  justify-content: flex-start;
+}
+.btn{
+  /* margin-left: 5%; */
+}
+
+
+.card-buttons{
+  display: flex;
+  flex-direction: row;
+  border:rgb(13, 146, 223) solid 2px;
+}
+/* .card-buttons button{
+    margin-left: 10px;
+} */

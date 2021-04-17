@@ -41,6 +41,7 @@ export default function Login(props){
             console.log(error)   
             // if login fails desplay 404 error from the backend 
             if(error.response.status === 400) {
+
             }else{
                 console.error(error)
             }
@@ -51,34 +52,35 @@ export default function Login(props){
     if(props.currentUser) return <Redirect to='/dashboard' component={ Dashboard } currentUser= { props.currentUser }/>
 
     return (
-        <div>
-            <h3>Login to Expensify:</h3>
+    
+            <div>
+                <h3>Login to Expensify:</h3>
 
-            <p>{message}</p>
+                <p>{message}</p>
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="email-input">Email:</label>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="email-input">Email:</label>
 
-                <input 
-                id="email"
-                type='email'
-                placeholder='user@email.com'
-                onChange={e => setEmail(e.target.value)}
-                value={email}
-                />
-                <label htmlFor="password">Password:</label>
-                <input 
-                id="password"
-                type='password'
-                placeholder='enter password'
-                onChange={e => setPassword(e.target.value)}
-                value={password}
-                />
+                    <input 
+                    id="email"
+                    type='email'
+                    placeholder='user@email.com'
+                    onChange={e => setEmail(e.target.value)}
+                    value={email}
+                    />
+                    <label htmlFor="password">Password:</label>
+                    <input 
+                    id="password"
+                    type='password'
+                    placeholder='enter password'
+                    onChange={e => setPassword(e.target.value)}
+                    value={password}
+                    />
 
-                <input type="submit" value='login'/>
+                    <input type="submit" value='login'/>
 
-            </form>
+                </form>
 
-        </div>
-    )
+            </div>
+    )   
 }
