@@ -7,12 +7,13 @@ export default function ButtonCCEdit(props){
     const cardData = props.creditCardData
 
     console.log(cardData)
+    console.log("^^^^ from ButtonCCEdit")
 
 
     return(
         <div>
             
-            <Link to={ {pathname: "testpath", state: {cardData} } } ><Button>Edit Card</Button></Link>
+            <Link to={ {pathname: "/credit-cards/edit", state: {cardData} } } ><Button>Edit Card</Button></Link>
         </div>
     )
 }

@@ -12,7 +12,7 @@ import VariableExpenses from './components/accounts/VariableExpenses'
 import Loans from './components/accounts/Loans'
 import Savings from './components/accounts/Savings'
 import CreditCardShow from './components/accounts/creditcards/CreditCardShow'
-import CreditCardEdit from './components/accounts/creditcards/buttons/ButtonCCEdit'
+import CreditCardEdit from './components/accounts/creditcards/CreditCardEdit'
 import NewCreditCard from './components/accounts/creditcards/NewCreditCard'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
@@ -70,11 +70,11 @@ function App() {
               render={ (props) => <CreditCards {...props} currentUser={ currentUser } setCurrentUser={ setCurrentUser} /> }
             />
             <Route 
-              exact path="/credit-cards/show"
+              path="/credit-cards/show"
               render={ (props) => <CreditCardShow {...props} currentUser={ currentUser } /> }
             />
             <Route 
-              exact path="/testpath"
+              path="/credit-cards/edit"
               render={ (props) => <CreditCardEdit {...props} currentUser={ currentUser } /> }
             />
             <Route 

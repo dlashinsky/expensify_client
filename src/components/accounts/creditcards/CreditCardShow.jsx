@@ -1,19 +1,15 @@
-import { useLocation } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import { useLocation, Redirect } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import ButtonCCEdit from './buttons/ButtonCCEdit'
 import Button from 'react-bootstrap/Button'
-
-
 
 export default function CreditCardShow(props){
     const location = useLocation()
     const creditCardId = location.state.creditCardInfo
     const [moreDetails, setMoreDetails] = useState({})
     const [loaded, setLoaded] = useState(false)
+    const [deleted, setDeleted] = useState(false)
 
                 // console.log(moreDetails)
                 // console.log("MORE DETAILS BEFORE")
@@ -34,20 +30,30 @@ export default function CreditCardShow(props){
                 setLoaded(true)
                 
             } catch (error) {
-                
+                console.log(error)
             }
         }   
         creditCard()
     }, [])
 
-    const handleEdit = (e) =>{
-        e.preventDefault()
-        console.log("edit button is working!")
+    const handleDelete = async function () {
+        try {
+       
+        const token = localStorage.getItem('jwtToken')
+        const authHeaders = {
+            'Authorization': `Bearer ${token}`
+        }  
+        const bearerToken = `Bearer ${token}`
+        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/creditcards/${creditCardId}`, { headers: authHeaders })
+        setDeleted(true)
+        console.log(response)
+        } catch (error) {
+            console.log(error)
+        }
+        
     }
-    
-        <Link to='/testpath'>test</Link>
 
-
+    if(deleted) return <Redirect to='/credit-cards'/>
     
     if (loaded){
         return(
@@ -57,7 +63,8 @@ export default function CreditCardShow(props){
                 <div>{moreDetails.attributes.payment_day}</div>
                 <div>{moreDetails.attributes.actual_payment}</div>
 
-                <Button onClick={handleEdit}>Edit Card</Button>
+                <ButtonCCEdit creditCardData={moreDetails}/>
+                <Button onClick={handleDelete}>Delete</Button>
             </div>
         )
     } else {

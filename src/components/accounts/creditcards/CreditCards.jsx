@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import CreditCardShow from './CreditCardShow'
 import ButtonCCInfo from './buttons/ButtonCCInfo'
-import ButtonCCEdit from './buttons/ButtonCCEdit'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -45,8 +44,8 @@ export default function CreditCards(props){
     }, [])
 
     const handleDelete = (e) =>{
-        e.preventDefault()
-        console.log("Button is linked!")
+       e.preventDefault()
+        console.log("Delete Button is linked!")
     }
    
     let totalCCDebt = 0.00
@@ -85,7 +84,6 @@ export default function CreditCards(props){
                     <Col xs="6">
                          <div className="mb-2">
                             <ButtonCCInfo key={idx} creditCardId={data.id}/>
-                            <Button key={idx} onClick={ handleDelete }>Delete </Button>
 
                         </div>
                     </Col>
