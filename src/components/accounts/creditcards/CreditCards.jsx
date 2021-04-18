@@ -50,56 +50,60 @@ export default function CreditCards(props){
    
     let totalCCDebt = 0.00
     const ccBasicData = creditCardData.map((data,idx) =>{
-        totalCCDebt += data.attributes.current_bal
-        
-        
-      
-        //Input ordinal NUMBER function for payment_day save to variable and put in return block 
-        function ordinalNumber(i){
-            let x = i % 10,
-                y = i % 100
-            if(x === 1 && y !== 11){ return i + "st" }
-            if(x === 2 && y !== 12){ return i + "nd" }
-            if(x === 3 && y !== 13){ return i + "rd" }
-            return i + "th"
-        }     
-        return (
-            <Container fluid>
-                <Row>
-                    <Col xs="1">
-                        <div className="cc-basic-data-div">
-                            <h1 className="card-nick-name"key={idx}>{data.attributes.nick_name} </h1>
-                            <h6 key={idx}>Card ending in: {data.attributes.last_four_card} </h6>
-                            <div className="cc-number-data">
-                                <h5 className="number-h5" key={idx}> Current Balance: ${data.attributes.current_bal.toLocaleString()} </h5>
-                                <h5 className="number-h5" key={idx}> Actual Payment: ${data.attributes.actual_payment.toLocaleString()} </h5> 
-                                <h5 className="number-h5" key={idx}> Credit Limit: ${data.attributes.credit_limit.toLocaleString()} </h5> 
-                            </div>   
-                            <h5 key={data.id}>Due Date: {ordinalNumber(data.attributes.payment_day)} </h5>
-                            
-                        </div>
-                    </Col>
-                </Row>
-                <Row> 
-                    <Col xs="6">
-                         <div className="mb-2">
-                            <ButtonCCInfo key={idx} creditCardId={data.id}/>
+        if(
+            data.attributes.nick_name && 
+            data.attributes.last_four_card && 
+            data.attributes.current_bal &&
+            data.attributes.actual_payment &&
+            data.attributes.credit_limit &&
+            data.attributes.payment_day)
+            {
+                totalCCDebt += data.attributes.current_bal
+                function ordinalNumber(i){
+                    let x = i % 10,
+                        y = i % 100
+                    if(x === 1 && y !== 11){ return i + "st" }
+                    if(x === 2 && y !== 12){ return i + "nd" }
+                    if(x === 3 && y !== 13){ return i + "rd" }
+                    return i + "th"
+                }     
+                return (
+                    <Container fluid>
+                        <Row>
+                            <Col xs="1">
+                                <div className="cc-basic-data-div">
+                                    <h1 className="card-nick-name"key={idx}>{data.attributes.nick_name} </h1>
+                                    <h6 key={idx}>Card ending in: {data.attributes.last_four_card} </h6>
+                                    <div className="cc-number-data">
+                                        <h5 className="number-h5" key={idx}> Current Balance: ${data.attributes.current_bal.toLocaleString()} </h5>
+                                        <h5 className="number-h5" key={idx}> Actual Payment: ${data.attributes.actual_payment.toLocaleString()} </h5> 
+                                        <h5 className="number-h5" key={idx}> Credit Limit: ${data.attributes.credit_limit.toLocaleString()} </h5> 
+                                    </div>   
+                                    <h5 key={data.id}>Due Date: {ordinalNumber(data.attributes.payment_day)} </h5>
+                                </div>
+                            </Col>
+                        </Row>
+                        <Row> 
+                            <Col xs="6">
+                                <div className="mb-2">
+                                    <ButtonCCInfo key={idx} creditCardId={data.id}/>
+                                </div>
+                            </Col>
+                        </Row>
+                    </Container>                
+                )
 
-                        </div>
-                    </Col>
-                </Row>
-
-            </Container>
-        
-        )
+            }
     })
     
     return (
         <div>
             <h1>Your Credit Cards </h1>
-            <h6>Total Credit Card Debt</h6>
-            <h1>${totalCCDebt.toLocaleString()}</h1>
-            <Link to="new-credit-card"><Button>Add a new CreditCard</Button></Link>
+            <div className= "ccIndexDebtCalc">
+                <h6>Total Credit Card Debt</h6>
+                <h1>${totalCCDebt.toLocaleString()}</h1>
+            </div>
+            <Link to="new-credit-card"><Button className="addNewCCBtn">Add a new CreditCard</Button></Link>
             <div className="main-container">
             <div className='credit-card-container'>{ccBasicData}</div>
 

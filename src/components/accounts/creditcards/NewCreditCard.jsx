@@ -53,88 +53,86 @@ export default function NewCreditCard(props){
             if (redirect) return <Redirect to='/credit-cards'/>
 
     return(
+        
         <div>
-        <h1>Hello from New Credit Card</h1>
-    
-            <h3>Add a new credit card </h3>
+            <h3>Add Your New Card Below</h3>
 
-            {/* <p>{message}</p> */}
+            <div className="ccFormContainer">
+                <div className="ccFormDiv">
 
+                    <form onSubmit={addNewCreditCard}>
+                        
+                        <label htmlFor="nick-name">Nick-name:</label>
+                        <input 
+                        id="nick-name"
+                        type='text'
+                        placeholder='My Personal CC'
+                        onChange={e => setNickName(e.target.value)}
+                        value={nickName}
+                        />
 
-            <form onSubmit={addNewCreditCard}>
-                
-                <label htmlFor="nick-name">Nick-name:</label>
-                <input 
-                id="nick-name"
-                type='text'
-                placeholder='My Personal CC'
-                onChange={e => setNickName(e.target.value)}
-                value={nickName}
-                />
+                        <label htmlFor="bank-name">Bank Name:</label>
+                        <input 
+                        id="bank-name"
+                        type='text'
+                        placeholder='Bank of America'
+                        onChange={e => setBankName(e.target.value)}
+                        value={bankName}
+                        />
+                        <label htmlFor="currentBal">Current Balance: </label>
+                        <input 
+                        id="currentBal"
+                        type='text'
+                        placeholder="'4234.12' (no symbols or spaces)"
+                        onChange={e => setCurrentBal(e.target.value)}
+                        value={currentBal}
+                        />
+                        <label htmlFor="creditLimit">Credit Limit: </label>
+                        <input 
+                        id="creditLimit"
+                        type='text'
+                        placeholder="'15000' (no symbols or spaces)"
+                        onChange={e => setCreditLimit(e.target.value)}
+                        value={creditLimit}
+                        />
+                        <label htmlFor="minPayment">Minimum Payment: </label>
+                        <input 
+                        id="minPayment"
+                        type='text'
+                        placeholder="'85.00' (no symbols or spaces)"
+                        onChange={e => setMinPayment(e.target.value)}
+                        value={minPayment}
+                        />
+                        <label htmlFor="actualPayment">Preferred Payment Amount: </label>
+                        <input 
+                        id="actualPayment"
+                        type='text'
+                        placeholder="'250' (no symbols or spaces)"
+                        onChange={e => setActualPayment(e.target.value)}
+                        value={actualPayment}
+                        />
+                        <label htmlFor="lastFourCard">Last Four Numbers on CC:</label>
+                        <input 
+                        id="lastFourCard"
+                        type='text'
+                        placeholder='5561'
+                        onChange={e => setLastFourCard(e.target.value)}
+                        value={lastFourCard}
+                        />
+                        <label htmlFor="paymentDay">Payment Day</label>
+                        <input 
+                        id="paymentDay"
+                        type='text'
+                        placeholder="'15' (just day number)"
+                        onChange={e => setPaymentDay(e.target.value)}
+                        value={paymentDay}
+                        />
+                        <input type="submit" value='Add'/>
 
-                <label htmlFor="bank-name">Bank Name:</label>
-                <input 
-                id="bank-name"
-                type='text'
-                placeholder='Bank of America'
-                onChange={e => setBankName(e.target.value)}
-                value={bankName}
-                />
-                <label htmlFor="currentBal">Current Balance: $</label>
-                <input 
-                id="currentBal"
-                type='text'
-                placeholder="'4234.12' (no symbols or spaces)"
-                onChange={e => setCurrentBal(e.target.value)}
-                value={currentBal}
-                />
-                <label htmlFor="creditLimit">Credit Limit: $</label>
-                <input 
-                id="creditLimit"
-                type='text'
-                placeholder="'15000' (no symbols or spaces)"
-                onChange={e => setCreditLimit(e.target.value)}
-                value={creditLimit}
-                />
-                <label htmlFor="minPayment">Minimum Payment: $</label>
-                <input 
-                id="minPayment"
-                type='text'
-                placeholder="'85.00' (no symbols or spaces)"
-                onChange={e => setMinPayment(e.target.value)}
-                value={minPayment}
-                />
-                <label htmlFor="actualPayment">Preferred Payment Amount: $</label>
-                <input 
-                id="actualPayment"
-                type='text'
-                placeholder="'250' (no symbols or spaces)"
-                onChange={e => setActualPayment(e.target.value)}
-                value={actualPayment}
-                />
-                <label htmlFor="lastFourCard">Last Four Numbers on CC:</label>
-                <input 
-                id="lastFourCard"
-                type='text'
-                placeholder='5561'
-                onChange={e => setLastFourCard(e.target.value)}
-                value={lastFourCard}
-                />
-                <label htmlFor="paymentDay">Payment Day</label>
-                <input 
-                id="paymentDay"
-                type='text'
-                placeholder="'15' (just day number)"
-                onChange={e => setPaymentDay(e.target.value)}
-                value={paymentDay}
-                />
+                    </form>
 
-                {/* <input type="hidden" value={user}/> */}
-
-                <input type="submit" value='Add'/>
-
-            </form>
-
+                </div>
+            </div>
         </div>
     )
 }

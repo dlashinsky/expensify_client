@@ -54,17 +54,25 @@ export default function CreditCardShow(props){
     }
 
     if(deleted) return <Redirect to='/credit-cards'/>
-    
+
+    let cardDetails = moreDetails.attributes
     if (loaded){
         return(
-            <div>
-                <div>{moreDetails.attributes.nick_name}</div>
-                <div>{moreDetails.attributes.bank_name}</div>
-                <div>{moreDetails.attributes.payment_day}</div>
-                <div>{moreDetails.attributes.actual_payment}</div>
+            <div className="ccShowCardContainer">
+                <h1>Your {cardDetails.nick_name}</h1>
+                <div className="ccShowCardinfo">
+                    <h4>Card Information</h4>   
+                    <h5>Bank/Creditor: {cardDetails.bank_name}</h5>
+                    <h5>Due Date: {cardDetails.payment_day}</h5>
+                </div>
+                <div className="ccShowCardBalanceData"> 
+                    <h3>Current Balance: ${cardDetails.current_bal.toLocaleString()}</h3>
+                </div>
+                <div className="ccShowButtons">
+                    <ButtonCCEdit creditCardData={moreDetails}/>
+                    <Button onClick={handleDelete}>Delete</Button>
 
-                <ButtonCCEdit creditCardData={moreDetails}/>
-                <Button onClick={handleDelete}>Delete</Button>
+                </div>
             </div>
         )
     } else {

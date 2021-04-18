@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import TopNavbar from './components/TopNavbar'
 import Register from './components/Register'
 import Home from './components/Home'
 import Login from './components/Login'
@@ -36,7 +36,7 @@ function App() {
       
 
       <header>
-        <Navbar currentUser={ currentUser } handleLogout={ handleLogout } />
+        <TopNavbar currentUser={ currentUser } handleLogout={ handleLogout } />
       </header>
 
       <div className='home-div-route'>
