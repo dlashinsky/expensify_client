@@ -8,7 +8,7 @@ export default function TopNavbar(props){
         return(
             <Navbar expand="md" variant="dark" bg="dark">
                 <Nav>
-                    <Navbar.Brand>Expensify</Navbar.Brand>   
+                    <Navbar.Brand>ExSpend</Navbar.Brand>   
                     <Nav.Link>  <Link to='/' onClick={props.handleLogout}> Logout </Link>   </Nav.Link>
                     <Nav.Link>  <Link to='/dashboard'> Dashboard </Link>                    </Nav.Link>
                     
@@ -21,7 +21,7 @@ export default function TopNavbar(props){
         <div>
             <Navbar  variant="dark" bg="dark">
                 <Nav className="mr-auto">
-                    <Navbar.Brand>Expensify</Navbar.Brand> 
+                    <Navbar.Brand>ExSpend</Navbar.Brand> 
                     <Nav.Link>  <Link to='/'> Home </Link>               </Nav.Link>
                     <Nav.Link>  <Link to='/register'> Register </Link>   </Nav.Link>
                     <Nav.Link>  <Link to='/login'> Login</Link>          </Nav.Link>

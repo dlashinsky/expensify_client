@@ -19,6 +19,22 @@ code {
   background-color: rgb(186, 210, 242);
   
 }
+.home-container-div{
+  display: grid;
+  grid-template-columns: 30% 70%;
+  width: 100%;
+  height:auto;
+}
+
+.home-image-div{
+  background-image: url("./images/background-img.jpg")
+}
+
+.home-logo-signup{
+  display: flex;
+  flex-direction: column;
+
+}
 
 .main-container{
   display: flex;
