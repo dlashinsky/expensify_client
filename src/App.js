@@ -74,7 +74,7 @@ function App() {
               render={ (props) => <CreditCardShow {...props} currentUser={ currentUser } /> }
             />
             <Route 
-              path="/credit-cards/edit"
+              exact path="/credit-cards/edit"
               render={ (props) => <CreditCardEdit {...props} currentUser={ currentUser } /> }
             />
             <Route 
