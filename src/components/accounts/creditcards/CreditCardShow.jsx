@@ -10,9 +10,9 @@ export default function CreditCardShow(props){
     const [moreDetails, setMoreDetails] = useState({})
     const [loaded, setLoaded] = useState(false)
     const [deleted, setDeleted] = useState(false)
-    let cardDetails = moreDetails.attributes
+    
 
-                // console.log(moreDetails)
+                // console.log(cardDetails.current_bal)
                 // console.log("MORE DETAILS BEFORE")
 
     useEffect(()=>{
@@ -55,8 +55,15 @@ export default function CreditCardShow(props){
     }
 
     if(deleted) return <Redirect to='/credit-cards'/>
-
-    let balance = cardDetails.current_bal
+    
+    
+    let cardDetails = moreDetails.attributes
+    console.log(cardDetails)
+    console.log("this log ^^^^")
+    let balance;
+    if(cardDetails){
+        balance = cardDetails.current_bal
+    }
 
     function spendingPowFunc(limit, bal){
         let sPower = limit - bal
@@ -76,21 +83,34 @@ export default function CreditCardShow(props){
         return(
             <div className="ccShowCardContainer">
                 <h1>Your {cardDetails.nick_name} Credit Card</h1>
+                <p> (ending in {cardDetails.last_four_card})</p>
 
                 <div className="ccShowCardBalanceData"> 
                     <h3>Current Balance: ${cardDetails.current_bal.toLocaleString()}</h3>
-                    <h4>Available Spending Power: ${spendingPowFunc(cardDetails.credit_limit, balance)}</h4>
+                    <h6>Available Spending Power: ${spendingPowFunc(cardDetails.credit_limit, balance)}</h6>
                 </div>
-                    <h5>Due on the {ordinalNumber(cardDetails.payment_day)}</h5>
+                    <h2>Card Information</h2> 
 
                 <div className="ccShowCardinfo">
-                    <h4>Card Information</h4>   
-                    <h5>Lender: {cardDetails.bank_name}</h5>
-                    <h5>Credit Limit: {cardDetails.credit_limit}</h5>
-                    <h5>{cardDetails.bank_name}</h5>
-                    <h5>Lender: {cardDetails.bank_name}</h5>
-                    <h5>Lender: {cardDetails.bank_name}</h5>
+
+                        <div className="ccCardDataTitleDiv">
+                        <h5>Lender/Bank:</h5>
+                        <h5>Credit Limit:</h5>
+                        <h5>Due on the:</h5>
+                        <h5>Minimum Payment:</h5>
+                        <h5>Your Preferred Payment:</h5>
+                    </div>
+
+                    <div className="ccCardDataDiv">
+                        <h5>{cardDetails.bank_name}</h5>
+                        <h5>${cardDetails.credit_limit.toLocaleString()}</h5>
+                        <h5>{ordinalNumber(cardDetails.payment_day)}</h5>
+                        <h5>${cardDetails.min_payment.toLocaleString()}</h5>
+                        <h5>${cardDetails.actual_payment.toLocaleString()}</h5>
+                    </div>  
+
                 </div>
+
                 <div className="ccShowButtons">
                     <ButtonCCEdit creditCardData={moreDetails}/>
                     <Button onClick={handleDelete}>Delete</Button>

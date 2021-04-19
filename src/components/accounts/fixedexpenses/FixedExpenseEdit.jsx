@@ -77,6 +77,7 @@ export default function FixedExpenseEdit(props) {
 
     return (
         <div>
+            <h2>Edit Your Expense Here, Click Submit below.</h2>
             <Form onSubmit={handleEditFixedExpense}>
 
                 <Form.Group controlId="formEditFEname">
@@ -86,6 +87,28 @@ export default function FixedExpenseEdit(props) {
                         />
                 </Form.Group>
 
+                <Form.Group controlId="formEditFEtype">
+                        <Form.Control 
+                        placeholder={`Current: ${expenseData.attributes.exp_type}`}
+                        onChange={handleExpName}
+                        />
+                </Form.Group>
+
+                <Form.Group controlId="formEditFEamount">
+                        <Form.Control 
+                        placeholder={`Current: ${expenseData.attributes.exp_amount}`}
+                        onChange={handleExpAmount}
+                        />
+                </Form.Group>
+
+                <Form.Group controlId="formEditFEpaymentDay">
+                        <Form.Control 
+                        placeholder={`Current: ${expenseData.attributes.payment_day}`}
+                        onChange={handlePaymentDay}
+                        />
+                </Form.Group>
+
+                <Button variant="primary" type="submit">Submit</Button>
             </Form>
         </div>
     )
