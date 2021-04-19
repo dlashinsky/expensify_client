@@ -1,4 +1,4 @@
-import logo from '../images/exspend-logo.png'
+import logo from '../images/ExSpend.png'
 import backgroundPic from '../images/background-img.jpg'
 import Register from './Register'
 import { useState }  from 'react'
@@ -27,7 +27,7 @@ export default function Home(props){
 
                             {/* <h1>Welcome to ExSpend!</h1> */}
                             <img src={logo} alt="No Image available"/>
-
+                            <p>Spend less time worrying about Spending.</p>
                             <Button onClick={handleClick}>Sign Up</Button> 
                             
                         </div>
@@ -36,10 +36,13 @@ export default function Home(props){
 
                         
                         <div className="home-image-div">
-                        
+                            <img src={backgroundPic} alt="No Image available"/>
                            
                         </div>
+                    
+                    <div>
 
+                    </div>
 
                        
                 </div>

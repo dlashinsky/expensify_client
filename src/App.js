@@ -1,20 +1,34 @@
+//DEPENDENCIES AND IMPORTS
 import { useState } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+//NAVIGATION/AUTHENTICATION COMPONENTS
 import TopNavbar from './components/TopNavbar'
 import Register from './components/Register'
 import Home from './components/Home'
 import Login from './components/Login'
 import Dashboard from './components/Dashboard'
 import SideNav from './components/SideNav'
+//CREDIT CARD COMPONENTS
 import CreditCards from './components/accounts/creditcards/CreditCards'
-import FixedExpenses from './components/accounts/FixedExpenses'
-import VariableExpenses from './components/accounts/VariableExpenses'
-import Loans from './components/accounts/Loans'
-import Savings from './components/accounts/Savings'
 import CreditCardShow from './components/accounts/creditcards/CreditCardShow'
 import CreditCardEdit from './components/accounts/creditcards/CreditCardEdit'
 import NewCreditCard from './components/accounts/creditcards/NewCreditCard'
-import 'bootstrap/dist/css/bootstrap.min.css'
+//FIXED EXPENSE COMPONENTS
+import FixedExpenses from './components/accounts/fixedexpenses/FixedExpenses'
+import FixedExpenseShow from './components/accounts/fixedexpenses/FixedExpenseShow'
+import FixedExpenseEdit from './components/accounts/fixedexpenses/FixedExpenseEdit'
+import NewFixedExpense from './components/accounts/fixedexpenses/NewFixedExpense'
+
+//VARIABLE EXPENSE COMPONENTS
+import VariableExpenses from './components/accounts/VariableExpenses'
+
+//LOAN COMPONENTS
+import Loans from './components/accounts/Loans'
+
+//SAVINGS COMPONENTS
+import Savings from './components/accounts/Savings'
 import './App.css';
 
 function App() {
@@ -82,8 +96,20 @@ function App() {
               render={ (props) => <NewCreditCard {...props} currentUser={ currentUser } /> }
             />
             <Route 
-              path="/fixed-expenses"
-              render={ (props) => <FixedExpenses {...props} currentUser={ currentUser } setCurrentUser={ setCurrentUser} /> }
+              exact path="/fixed-expenses"
+              render={ (props) => <FixedExpenses {...props} currentUser={ currentUser } /> }
+            />
+            <Route 
+              path="/fixed-expenses/show"
+              render={ (props) => <FixedExpenseShow {...props} currentUser={ currentUser }  /> }
+            />
+            <Route 
+              exact path="/fixed-expenses/edit"
+              render={ (props) => <FixedExpenseEdit {...props} currentUser={ currentUser }  /> }
+            />
+            <Route 
+              path="/new-fixed-expenses"
+              render={ (props) => <NewFixedExpense {...props} currentUser={ currentUser }  /> }
             />
             <Route 
               path="/variable-expenses"

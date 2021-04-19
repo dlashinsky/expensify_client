@@ -18,10 +18,7 @@ export default function CreditCards(props){
 
 
     const showCreditCard = function () {
-
-        
         console.log(`button is linked!!`)
-    
     } 
 
     useEffect(()=>{

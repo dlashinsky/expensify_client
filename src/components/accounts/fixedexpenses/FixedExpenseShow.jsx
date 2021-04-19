@@ -1,40 +1,40 @@
 import { useLocation, Redirect } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import ButtonCCEdit from './buttons/ButtonCCEdit'
+import ButtonFEedit from './buttons/buttonFEedit'
 import Button from 'react-bootstrap/Button'
 
-export default function CreditCardShow(props){
+export default function FixedExpenseShow(props){
     const location = useLocation()
-    const creditCardId = location.state.creditCardInfo
+    const fixedExpenseId = location.state.fixedExpenseInfo
     const [moreDetails, setMoreDetails] = useState({})
     const [loaded, setLoaded] = useState(false)
     const [deleted, setDeleted] = useState(false)
-    let cardDetails = moreDetails.attributes
+    let expenseDetails = moreDetails.attributes
 
                 // console.log(moreDetails)
                 // console.log("MORE DETAILS BEFORE")
 
     useEffect(()=>{
-        const creditCard = async function () {
+        const fixedExpense = async function () {
             try {
                 const token = localStorage.getItem('jwtToken')
                 const authHeaders = {
                     'Authorization': `Bearer ${token}`
                 }  
 
-                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/creditcards/${creditCardId}`, { headers: authHeaders })
-                const CC_DATA = response.data.data
+                const response = await axios.get(`${process.env.REACT_APP_SERVER_URL}/api/v1/fixedexpenses/${fixedExpenseId}`, { headers: authHeaders })
+                const FE_DATA = response.data.data
                 // console.log(CC_DATA)
                 // console.log("^^^^^^^^^^^^^^^")
-                setMoreDetails(CC_DATA)
+                setMoreDetails(FE_DATA)
                 setLoaded(true)
                 
             } catch (error) {
                 console.log(error)
             }
         }   
-        creditCard()
+        fixedExpense()
     }, [])
 
     const handleDelete = async function () {
@@ -45,7 +45,7 @@ export default function CreditCardShow(props){
             'Authorization': `Bearer ${token}`
         }  
         const bearerToken = `Bearer ${token}`
-        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/creditcards/${creditCardId}`, { headers: authHeaders })
+        const response = await axios.delete(`${process.env.REACT_APP_SERVER_URL}/api/v1/fixedexpenses/${fixedExpenseId}`, { headers: authHeaders })
         setDeleted(true)
         console.log(response)
         } catch (error) {
@@ -54,15 +54,9 @@ export default function CreditCardShow(props){
         
     }
 
-    if(deleted) return <Redirect to='/credit-cards'/>
+    if(deleted) return <Redirect to='/fixed-expenses'/>
 
-    let balance = cardDetails.current_bal
-
-    function spendingPowFunc(limit, bal){
-        let sPower = limit - bal
-        return sPower.toLocaleString()
-    } 
-
+   
     function ordinalNumber(i){
         let x = i % 10,
             y = i % 100
@@ -75,26 +69,16 @@ export default function CreditCardShow(props){
     if (loaded){
         return(
             <div className="ccShowCardContainer">
-                <h1>Your {cardDetails.nick_name} Credit Card</h1>
+                <h1>Your {expenseDetails.exp_name} Expense</h1>
 
                 <div className="ccShowCardBalanceData"> 
-                    <h3>Current Balance: ${cardDetails.current_bal.toLocaleString()}</h3>
-                    <h4>Available Spending Power: ${spendingPowFunc(cardDetails.credit_limit, balance)}</h4>
+                    <h3>Monthly Payment Amount: ${expenseDetails.exp_amount.toLocaleString()}</h3>
                 </div>
-                    <h5>Due on the {ordinalNumber(cardDetails.payment_day)}</h5>
+                    <h5>Due on the {ordinalNumber(expenseDetails.payment_day)}</h5>
 
-                <div className="ccShowCardinfo">
-                    <h4>Card Information</h4>   
-                    <h5>Lender: {cardDetails.bank_name}</h5>
-                    <h5>Credit Limit: {cardDetails.credit_limit}</h5>
-                    <h5>{cardDetails.bank_name}</h5>
-                    <h5>Lender: {cardDetails.bank_name}</h5>
-                    <h5>Lender: {cardDetails.bank_name}</h5>
-                </div>
                 <div className="ccShowButtons">
-                    <ButtonCCEdit creditCardData={moreDetails}/>
+                    <ButtonFEedit fixedExpenseData={moreDetails}/>
                     <Button onClick={handleDelete}>Delete</Button>
-
                 </div>
             </div>
         )
