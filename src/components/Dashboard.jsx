@@ -103,34 +103,68 @@ export default function Dashboard(props){
         let fixedExpensesMap;
         let variableExpMap;
         let totalMonthlyExp = 0;
+        function ordinalNumber(i){
+            let x = i % 10,
+                y = i % 100
+            if(x === 1 && y !== 11){ return i + "st" }
+            if(x === 2 && y !== 12){ return i + "nd" }
+            if(x === 3 && y !== 13){ return i + "rd" }
+            return i + "th"
+        }  
+        let totalLoan = 0
+        let totalCC = 0
+        let totalFE = 0
+        let totalVE = 0
 
         if(loanData && creditCardData && fixedExpenseData && variableExpenseData){
              loansMap = loanData.map((data, idx) =>{
+                 totalLoan += data.attributes.actual_payment
                  totalMonthlyExp += data.attributes.actual_payment
                 return (
-                    <h5>${data.attributes.actual_payment.toLocaleString()}</h5>
+                    <div className ="ccDashData">
+                        <h5>${data.attributes.actual_payment.toLocaleString()}</h5>
+                        <h5>{ordinalNumber(data.attributes.payment_day)}</h5>
+                        
+                    </div>
                 )
             })
             creditCardsMap = creditCardData.map((data, idx) =>{
-                totalMonthlyExp += data.attributes.actual_payment
+                totalMonthlyExp += data.attributes.actual_payment  
+                totalCC += data.attributes.actual_payment 
                 return (
-                    <h5>${data.attributes.actual_payment.toLocaleString()}</h5>
+                    <div className ="ccDashData">
+                       
+                        <h5>${data.attributes.actual_payment.toLocaleString()}</h5>
+                        <h5>{ordinalNumber(data.attributes.payment_day)}</h5>
+                    </div>
                 )
             })
             fixedExpensesMap = fixedExpenseData.map((data, idx) =>{
                 totalMonthlyExp += data.attributes.exp_amount
+                totalFE += data.attributes.exp_amount
                 return (
-                    <h5>${data.attributes.exp_amount.toLocaleString()}</h5>
+                    <div className ="ccDashData">
+                       
+                       <h5>${data.attributes.exp_amount.toLocaleString()}</h5>
+                        <h5>{ordinalNumber(data.attributes.payment_day)}</h5>
+                    </div>
+                    
                 )
             })
             variableExpMap = variableExpenseData.map((data, idx) =>{          
                 function aveVarExp(min, max){
                     let aveMinMax = (min + max)/2
                     totalMonthlyExp += aveMinMax
+                    totalVE += aveMinMax
                     return aveMinMax
                 }  
                 return (
-                    <h5>${aveVarExp(data.attributes.monthly_min, data.attributes.monthly_max)}</h5>
+                    <div className ="ccDashData">
+                       
+                       <h5>${aveVarExp(data.attributes.monthly_min, data.attributes.monthly_max)}</h5>
+                        <h5>{data.attributes.exp_name}</h5>
+                    </div>
+                    
                 )
             })
         } else {
@@ -139,24 +173,75 @@ export default function Dashboard(props){
         }
     return (
 
-        <div>
-            <h1>Hello {user.first_name} from Dashboard!</h1>
+        <div className="dashContainer">
 
-            <h2>Total Expenses This month</h2>
-               <h3>${totalMonthlyExp.toLocaleString()} </h3> 
+            <h2>Welcome back, {user.first_name}!</h2>
+            <h6>Here is a snap shot of what you're owing.</h6>
 
-            <h2>Credit Card Payments Due:</h2>
-                {creditCardsMap}
-
-            <h2>Fixed Expenses:</h2>
-                {fixedExpensesMap}
+            <h5>Total Expenses This month</h5>
             
-            <h2>Variable Expenses</h2>
-                {variableExpMap}
+            <h2 className="dashTotal">${totalMonthlyExp.toLocaleString()} </h2> 
 
-            <h2>Loan Payments Due: </h2>
-                {loansMap}
+            <div className="dataDashDiv">
 
+
+                <div className ="dataDash">
+                        <h2>Credit Card Payments</h2>
+                    <div className="dashTableLable">
+                        <h3>Amount</h3>
+                        <h3>Due Date</h3>
+                    </div>
+
+                    <div>
+                        <h4>{creditCardsMap}</h4>
+                    <div>
+                        <h3>Total CC Payments:${totalCC.toLocaleString()}</h3>
+                    </div>
+
+                    </div>   
+                </div>
+                
+                <div className="dataDash">
+                    <h3>Fixed Expenses:</h3>
+                    <div className="dashTableLable">
+                        <h3>Amount</h3>
+                        <h3>Due Date</h3>
+                    </div>
+                        <h4>{fixedExpensesMap}</h4>
+                    <div>
+                        <h3>Total Fixed Expenses:${totalFE.toLocaleString()}</h3>
+                    </div>
+                </div>
+                
+                <div className="dataDash">
+                    <h2>Variable Expenses</h2> 
+                    <div className="dashTableLable">
+                        <h3>Amount</h3>
+                        <h3>Expense</h3>
+                    </div>
+                    <div className="veDataDiv">
+                        <h4 className="data">{variableExpMap}</h4>
+
+                    </div>
+                    <div className ="dashDataPymt">
+                        <h3>Total Variable Expenses: ~${totalVE.toLocaleString()}</h3>
+                    </div>
+
+                </div>
+                
+                <div className="dataDash">
+                    <h2>Loan Payments</h2>
+                <div className="dashTableLable">
+                    <h3>Amount</h3>
+                    <h3>Due Date</h3>
+                </div>
+                    <h4 className="data">{loansMap}</h4>
+                    <div>
+                        <h3>Total Loan Payments:${totalLoan.toLocaleString()}</h3>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
           
